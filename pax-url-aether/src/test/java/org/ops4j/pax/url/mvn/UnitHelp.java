@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
@@ -96,7 +97,7 @@ public class UnitHelp
      * Load settings.xml file and apply custom properties.
      */
     public static MavenConfiguration getConfig( final File settingsFile,
-            final Properties props ) 
+            final Properties props ) throws MalformedURLException
     {
 
         props.setProperty( ServiceConstants.PID + "."

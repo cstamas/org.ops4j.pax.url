@@ -24,7 +24,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.ops4j.lang.NullArgumentException;
-import org.ops4j.pax.url.mvn.internal.config.MavenRepositoryURL;
 
 public class RepositoryURLTest
 {

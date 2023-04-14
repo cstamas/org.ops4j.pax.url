@@ -24,6 +24,7 @@ import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Properties;
@@ -163,7 +164,7 @@ public class MirrorAuthenticationTest
         return settings;
     }
 
-    private MavenConfigurationImpl getConfig( String settingsPath, String id, String url )
+    private MavenConfigurationImpl getConfig( String settingsPath, String id, String url ) throws MalformedURLException
     {
         Properties p = new Properties();
         MavenConfigurationImpl config = new MavenConfigurationImpl( new PropertiesPropertyResolver(

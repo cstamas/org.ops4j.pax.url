@@ -40,8 +40,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
 
         <release-paxurl-altGitURL>scm:git:https://github.com/ops4j/org.ops4j.pax.url.git</release-paxurl-altGitURL>
         <wiki.url>https://ops4j1.jira.com/wiki/spaces/paxurl/overview</wiki.url>
@@ -72,15 +72,12 @@
         <dependency.paxexam.version>3.5.0</dependency.paxexam.version>
         <dependency.swissbox.version>1.8.5</dependency.swissbox.version>
 
-        <dependency.slf4j.version>1.7.32</dependency.slf4j.version>
-        <dependency.logback.version>1.2.3</dependency.logback.version>
+        <dependency.slf4j.version>1.7.36</dependency.slf4j.version>
+        <dependency.logback.version>1.2.12</dependency.logback.version>
 
-        <dependency.maven.version>3.8.6</dependency.maven.version>
-        <dependency.maven.resolver.version>1.8.2</dependency.maven.resolver.version>
-        <dependency.wagon.version>3.5.2</dependency.wagon.version>
-
-        <dependency.httpcomponents.core>4.4.10</dependency.httpcomponents.core>
-        <dependency.httpcomponents.client>4.5.13</dependency.httpcomponents.client>
+        <dependency.mima.version>1.0.4-SNAPSHOT</dependency.mima.version>
+        <dependency.maven.version>3.9.1</dependency.maven.version>
+        <dependency.maven.resolver.version>1.9.7</dependency.maven.resolver.version>
 
         <dependency.jackson.version>1.2.0</dependency.jackson.version>
         <dependency.jetty.version>7.3.1.v20110307</dependency.jetty.version>
@@ -95,7 +92,6 @@
 
     <modules>
         <module>pax-url-commons</module>
-        <module>pax-url-aether-support</module>
         <module>pax-url-aether</module>
         <module>pax-url-assembly</module>
         <module>pax-url-cache</module>
@@ -122,11 +118,6 @@
             <dependency>
                 <groupId>org.ops4j.pax.url</groupId>
                 <artifactId>pax-url-classpath</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.url</groupId>
-                <artifactId>pax-url-aether-support</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -230,34 +221,23 @@
             <!-- Maven -->
 
             <dependency>
-                <groupId>org.codehaus.plexus</groupId>
-                <artifactId>plexus-utils</artifactId>
-                <version>3.3.1</version>
+                <groupId>eu.maveniverse.maven.mima</groupId>
+                <artifactId>context</artifactId>
+                <version>${dependency.mima.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.codehaus.plexus</groupId>
-                <artifactId>plexus-sec-dispatcher</artifactId>
-                <version>2.0</version>
+                <groupId>eu.maveniverse.maven.mima.runtime</groupId>
+                <artifactId>embedded-maven</artifactId>
+                <version>${dependency.mima.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.codehaus.plexus</groupId>
-                <artifactId>plexus-cipher</artifactId>
-                <version>2.0</version>
+                <groupId>eu.maveniverse.maven.mima.runtime</groupId>
+                <artifactId>standalone-sisu</artifactId>
+                <version>${dependency.mima.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.apache.maven.resolver</groupId>
                 <artifactId>maven-resolver-api</artifactId>
-                <version>${dependency.maven.resolver.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven.resolver</groupId>
-                <artifactId>maven-resolver-impl</artifactId>
-                <version>${dependency.maven.resolver.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven.resolver</groupId>
-                <artifactId>maven-resolver-spi</artifactId>
                 <version>${dependency.maven.resolver.version}</version>
             </dependency>
             <dependency>
@@ -266,63 +246,19 @@
                 <version>${dependency.maven.resolver.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.maven.resolver</groupId>
-                <artifactId>maven-resolver-connector-basic</artifactId>
-                <version>${dependency.maven.resolver.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven.resolver</groupId>
-                <artifactId>maven-resolver-transport-wagon</artifactId>
-                <version>${dependency.maven.resolver.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.apache.maven</groupId>
-                <artifactId>maven-resolver-provider</artifactId>
-                <version>${dependency.maven.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-settings-builder</artifactId>
+                <artifactId>maven-repository-metadata</artifactId>
                 <version>${dependency.maven.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.maven.shared</groupId>
                 <artifactId>maven-invoker</artifactId>
-                <version>3.0.1</version>
+                <version>3.2.0</version>
                 <scope>test</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-file</artifactId>
-                <version>${dependency.wagon.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-http</artifactId>
-                <version>${dependency.wagon.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-provider-api</artifactId>
-                <version>${dependency.wagon.version}</version>
-            </dependency>
-
             <!-- Other -->
-
-            <!-- smallest possible fix for PAXURL-345 -->
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>${dependency.httpcomponents.client}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpcore</artifactId>
-                <version>${dependency.httpcomponents.core}</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.codehaus.jackson</groupId>
@@ -373,7 +309,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.13.1</version>
+                <version>4.13.2</version>
             </dependency>
             <dependency>
                 <groupId>org.easymock</groupId>

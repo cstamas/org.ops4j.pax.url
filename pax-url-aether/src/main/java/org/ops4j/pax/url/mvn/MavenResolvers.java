@@ -15,6 +15,7 @@
  */
 package org.ops4j.pax.url.mvn;
 
+import java.net.MalformedURLException;
 import java.util.Dictionary;
 
 import org.ops4j.pax.url.mvn.internal.AetherBasedResolver;
@@ -24,15 +25,13 @@ import org.ops4j.util.property.PropertiesPropertyResolver;
 
 public final class MavenResolvers {
 
-    public static MavenResolver createMavenResolver(Dictionary<String, String> properties, String pid) {
-        return createMavenResolver(null, properties, pid);
-    }
-
-    public static MavenResolver createMavenResolver(MirrorInfo mirror, Dictionary<String, String> properties, String pid) {
+    public static MavenResolver createMavenResolver(Dictionary<String, String> properties, String pid) throws
+            MalformedURLException
+    {
         PropertiesPropertyResolver syspropsResolver = new PropertiesPropertyResolver(System.getProperties());
         DictionaryPropertyResolver propertyResolver = new DictionaryPropertyResolver(properties, syspropsResolver);
         MavenConfigurationImpl config = new MavenConfigurationImpl(propertyResolver, pid);
-        return new AetherBasedResolver(config, mirror);
+        return new AetherBasedResolver(config);
     }
 
     private MavenResolvers() { }

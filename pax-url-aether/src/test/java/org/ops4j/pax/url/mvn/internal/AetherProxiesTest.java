@@ -16,6 +16,7 @@
 package org.ops4j.pax.url.mvn.internal;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Collections;
 import java.util.Properties;
 import java.util.UUID;
@@ -94,7 +95,7 @@ public class AetherProxiesTest {
         pool.shutdown();
     }
 
-    private MavenConfigurationImpl mavenConfiguration() {
+    private MavenConfigurationImpl mavenConfiguration() throws MalformedURLException {
         Properties properties = new Properties();
         properties.setProperty("pid.localRepository", "target/" + UUID.randomUUID().toString());
         properties.setProperty("pid.globalChecksumPolicy", "ignore");

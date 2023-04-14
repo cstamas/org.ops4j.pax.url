@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
 
 import org.ops4j.lang.NullArgumentException;
 import org.ops4j.pax.url.mvn.MavenResolver;
@@ -121,6 +122,6 @@ public class Connection
         connect();
         LOG.debug( "Resolving [" + url.toExternalForm() + "]" );
         File file = m_resolver.resolve( url.toExternalForm() );
-        return new FileInputStream( file );
+        return Files.newInputStream( file.toPath() );
     }
 }

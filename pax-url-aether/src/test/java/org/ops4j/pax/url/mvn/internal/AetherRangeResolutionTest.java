@@ -20,6 +20,7 @@ package org.ops4j.pax.url.mvn.internal;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -86,7 +87,9 @@ public class AetherRangeResolutionTest {
         }
     }
 
-    private MavenConfigurationImpl basicMavenConfiguration(String globalUpdatePolicy, String repo) {
+    private MavenConfigurationImpl basicMavenConfiguration(String globalUpdatePolicy, String repo) throws
+            MalformedURLException
+    {
         Properties properties = new Properties();
         properties.setProperty("pid.localRepository", "target/" + UUID.randomUUID().toString());
         properties.setProperty("pid.repositories", "");

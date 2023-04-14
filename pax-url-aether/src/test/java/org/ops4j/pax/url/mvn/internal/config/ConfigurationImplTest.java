@@ -61,14 +61,13 @@ public class ConfigurationImplTest
     private static final String PID = "org.ops4j.pax.url.mvn";
 
     @Test( expected = IllegalArgumentException.class )
-    public void constructorWithNullResolver()
-    {
+    public void constructorWithNullResolver() throws MalformedURLException {
         new MavenConfigurationImpl( null, PID );
     }
 
     @Test( expected = AssertionError.class )
     public void getMalformedSettings()
-            throws FileNotFoundException
+            throws FileNotFoundException, MalformedURLException
     {
         PropertyResolver propertyResolver = createMock( PropertyResolver.class );
         File malformedSettings = FileUtils.getFileFromClasspath( "configuration/malformed-settings.xml" );
@@ -82,7 +81,7 @@ public class ConfigurationImplTest
     }
 
     @Test
-    public void getCertificateCheck()
+    public void getCertificateCheck() throws MalformedURLException
     {
         PropertyResolver propertyResolver = createMock( PropertyResolver.class );
         expect( propertyResolver.get( "org.ops4j.pax.url.mvn.localRepository" ) ).andReturn( null );
@@ -96,7 +95,7 @@ public class ConfigurationImplTest
     }
 
     @Test
-    public void getDefaultCertificateCheck()
+    public void getDefaultCertificateCheck() throws MalformedURLException
     {
         PropertyResolver propertyResolver = createMock( PropertyResolver.class );
         expect( propertyResolver.get( "org.ops4j.pax.url.mvn.localRepository" ) ).andReturn( null );
@@ -394,7 +393,7 @@ public class ConfigurationImplTest
         verify( propertyResolver );
     }
     
-    private Settings settingsForRepository(String id, String url) 
+    private Settings _settingsForRepository(String id, String url)
     {
         Settings settings = new Settings();
         Profile profile = new Profile();
@@ -699,7 +698,7 @@ public class ConfigurationImplTest
     }
 
     @Test
-    public void useFallbackRepositories()
+    public void useFallbackRepositories() throws MalformedURLException
     {
         PropertyResolver propertyResolver = createMock( PropertyResolver.class );
         expect( propertyResolver.get( "org.ops4j.pax.url.mvn.localRepository" ) ).andReturn( null );

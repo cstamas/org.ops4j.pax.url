@@ -17,6 +17,7 @@ package org.ops4j.pax.url.mvn.internal;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Dictionary;
@@ -25,7 +26,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.ops4j.pax.url.mvn.MavenResolver;
 import org.ops4j.pax.url.mvn.ServiceConstants;
-import org.ops4j.pax.url.mvn.internal.config.MavenConfiguration;
 import org.ops4j.pax.url.mvn.internal.config.MavenConfigurationImpl;
 import org.ops4j.util.property.DictionaryPropertyResolver;
 import org.ops4j.util.property.PropertyResolver;
@@ -175,9 +175,14 @@ public class Activator extends AbstractURLStreamHandlerService
         } else {
             propertyResolver = new DictionaryPropertyResolver(config);
         }
-        MavenConfiguration mavenConfig = new MavenConfigurationImpl(propertyResolver, ServiceConstants.PID);
-        if (!((MavenConfigurationImpl) mavenConfig).isValid()) {
-             return;
+        MavenConfigurationImpl mavenConfig;
+        try {
+            mavenConfig = new MavenConfigurationImpl( propertyResolver, ServiceConstants.PID );
+            if (!mavenConfig.isValid()) {
+                return;
+            }
+        } catch (MalformedURLException e) {
+            return;
         }
         MavenResolver resolver = new AetherBasedResolver(mavenConfig);
         MavenResolver oldResolver = m_resolver.getAndSet( resolver );

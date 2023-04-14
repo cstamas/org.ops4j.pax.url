@@ -21,19 +21,20 @@ package org.ops4j.pax.url.mvn.internal.config;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.maven.settings.Settings;
+import eu.maveniverse.maven.mima.context.ContextOverrides;
 import org.ops4j.util.property.PropertyResolver;
 
 /**
- * Handler configuration.
+ * Handler configuration. Once created, is immutable.
  *
  * @author Alin Dreghiciu
  * @author Guillaume Nodet
  * @since August 11, 2007
  */
 public interface MavenConfiguration {
+
+    ContextOverrides contextOverrides();
 
     boolean isOffline();
 
@@ -45,9 +46,9 @@ public interface MavenConfiguration {
     Boolean getCertificateCheck();
 
     /**
-     * Returns the URL of maven settings file.
+     * Returns the URL of maven settings file, is given.
      *
-     * @return the url to settings file
+     * @return the url to settings file or null.
      */
     URL getSettingsFileUrl();
 
@@ -107,33 +108,6 @@ public interface MavenConfiguration {
      * @return the timeout in case artifacts are retrieved from a remote location
      */
     Integer getTimeout();
-
-    /**
-     * @param url Enables the proxy server for a given URL.
-     */
-    void enableProxy( URL url );
-
-    /**
-     * Returns the active proxy settings from settings.xml
-     * The fields are user, pass, host, port, nonProxyHosts, protocol.
-     *
-     * @param protocols protocols to be recognized.
-     *
-     * @return the active proxy settings
-     */
-    Map<String, Map<String, String>> getProxySettings( String... protocols );
-
-    /**
-     * Returns the mirror settings from settings.xml.
-     * The fields are id, url, mirrorOf, layout, mirrorOfLayouts.
-     *
-     * @return the mirror settings
-     */
-    Map<String, Map<String, String>> getMirrors();
-    
-    Settings getSettings();
-    
-    String getSecuritySettings();
 
     PropertyResolver getPropertyResolver();
 

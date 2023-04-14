@@ -20,6 +20,7 @@ package org.ops4j.pax.url.mvn.internal;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -47,7 +48,7 @@ public class AetherMultiResolutionTest {
         assertTrue(resolver.resolve("mvn:ant/ant/1.5.2-SNAPSHOT").getCanonicalPath().endsWith("r2/ant/ant/1.5.2-SNAPSHOT/ant-1.5.2-SNAPSHOT.jar"));
     }
 
-    private MavenConfigurationImpl basicMavenConfiguration(String globalUpdatePolicy) {
+    private MavenConfigurationImpl basicMavenConfiguration(String globalUpdatePolicy) throws MalformedURLException {
         Properties properties = new Properties();
         properties.setProperty("pid.localRepository", "target/" + UUID.randomUUID().toString());
         properties.setProperty("pid.repositories", "");
